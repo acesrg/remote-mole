@@ -1,0 +1,11 @@
+[flake8]
+ignore =
+exclude =
+    .git,
+    .venv/,
+    docs/source/conf.py,
+    __pycache__,
+    old,
+    build,
+    dist
+max-complexity = 10
