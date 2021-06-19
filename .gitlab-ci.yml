@@ -1,0 +1,55 @@
+variables:
+  PEP8_CONFIG_FILE: .flake8
+
+stages:
+  - lint
+  - test
+  - deploy
+
+flake8:
+  stage: lint
+  image: registry.gitlab.com/pipeline-components/flake8:latest
+  script:
+    - flake8 --verbose --config $PEP8_CONFIG_FILE .
+
+installability:
+  stage: test
+  image: python:3.8.7-buster
+  script:
+    - pip install -r requirements.txt
+    - pip install .
+  tags:
+    - rpi
+
+unittest:
+  stage: test
+  image: python:3.8.7-buster
+  before_script:
+    - pip install -r requirements.txt
+    - pip install .
+    - pip install coverage
+  script:
+    - coverage run --source=/usr/local/lib/python3.8/site-packages/remote_ninja -m unittest discover -v tests/
+  after_script:
+    - coverage report
+    - coverage html
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/htmlcov
+  tags:
+    - rpi
+
+pypi-deploy:
+  stage: deploy
+  image: python:3.8.7-buster
+  variables:
+    CRYPTOGRAPHY_DONT_BUILD_RUST: 1
+  before_script:
+    - pip install twine -q
+    - python3 setup.py sdist
+  script:
+    - twine upload -u=__token__ -p=$PYPI_UPLOAD_TOKEN dist/*
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /^v\d+.\d+.\d+/'
+  tags:
+    - rpi
