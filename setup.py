@@ -11,17 +11,17 @@ def read(fname):
 
 
 setup(
-    name="remote_ninja",
+    name="remote_mole",
     version="0.1.0",
     author="Marco Miretti",
     author_email="marcomiretti@gmail.com",
-    description=("Create ninjas on remote setups."),
+    description=("Create moles on remote setups."),
     license="GPLv3",
     keywords="bots ssh jupyter ngrok discord",
-    url="http://packages.python.org/remote_ninja",
+    url="http://packages.python.org/remote_mole",
     packages=[
-        'remote_ninja.{}'.format(sub_pkg) for sub_pkg in find_packages(
-            where='src/remote_ninja'
+        'remote_mole.{}'.format(sub_pkg) for sub_pkg in find_packages(
+            where='src/remote_mole'
         )
     ],
     package_dir={'': 'src'},
@@ -29,7 +29,7 @@ setup(
     long_description_content_type='text/markdown',
     entry_points={
         'console_scripts': [
-            'remote_ninja = remote_ninja.setup.entrypoint:register',
+            'remote_mole = remote_mole.setup.entrypoint:register',
         ]
     },
 )

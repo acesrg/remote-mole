@@ -29,7 +29,7 @@ unittest:
     - pip install .
     - pip install coverage
   script:
-    - coverage run --source=/usr/local/lib/python3.8/site-packages/remote_ninja -m unittest discover -v tests/
+    - coverage run --source=/usr/local/lib/python3.8/site-packages/remote_mole -m unittest discover -v tests/
   after_script:
     - coverage report
     - coverage html

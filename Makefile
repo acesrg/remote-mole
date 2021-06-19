@@ -1,4 +1,4 @@
-PROJECT_NAME=remote_ninja
+PROJECT_NAME=remote_mole
 
 PEP8_CONFIG_FILE=.flake8
 
