@@ -1,0 +1,7 @@
+FROM sphinxdoc/sphinx
+
+COPY requirements.txt /docs
+
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+RUN pip3 install --no-cache-dir sphinx-rtd-theme
