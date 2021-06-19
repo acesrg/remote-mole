@@ -27,10 +27,9 @@ setup(
     package_dir={'': 'src'},
     long_description=read('readme.md'),
     long_description_content_type='text/markdown',
-    entry_points = {
+    entry_points={
         'console_scripts': [
             'remote_ninja = remote_ninja.setup.entrypoint:register',
         ]
     },
 )
-
