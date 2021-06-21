@@ -3,34 +3,30 @@ from __future__ import print_function, unicode_literals
 import os
 
 from PyInquirer import prompt
-from pyngrok import config
 import toml
 
 
 AVAILABLE_BOTS = [
     'Discord',
 ]
-CONFIG_PATH = '/etc/remote_mole/config.toml'
-TEMP_DIR = '/tmp'
+
+CONFIG_PATH = os.path.join(
+    os.path.expanduser('~'),
+    '.config/remote_mole/config.toml',
+)
 
 
 def _create_file_with_content(filename, content):
     basename = os.path.basename(filename)
     dirname = os.path.dirname(filename)
-    non_root_path = os.path.join(TEMP_DIR, basename)
-    with open(non_root_path, "w") as f:
+    os.mkdir
+    try:
+        os.makedirs(dirname)
+    except FileExistsError:
+        pass
+
+    with open(filename, "w") as f:
         f.write(content)
-
-    are_we_root = os.getuid() == 0
-    if are_we_root:
-        root_exec = ''
-    else:
-        root_exec = 'sudo'
-        print("remote_mole needs root access to write config files.")
-
-    os.system(f'{root_exec} mkdir -p {dirname}')
-    os.system(f'{root_exec} mv {non_root_path} {CONFIG_PATH}')
-    print("...done, config was written")
 
 
 def register():
