@@ -3,6 +3,7 @@ from __future__ import print_function, unicode_literals
 import os
 
 from PyInquirer import prompt
+from pyngrok import config
 import toml
 
 
@@ -40,6 +41,16 @@ def register():
             'message': 'Where will you talk to the bot from',
             'choices': ['Discord'],
         },
+        {
+            'type': 'confirm',
+            'name': 'ngrok',
+            'message': 'Will you use ngrok',
+        },
+        {
+            'type': 'confirm',
+            'name': 'ngrok_auth',
+            'message': 'Do you want to set up a ngrok token (recommended)',
+        },
 
     ]
     answers = prompt(questions)
@@ -58,6 +69,24 @@ def register():
             },
         ]
         platform_answers['Discord'] = prompt(discord_questions)
+
+    if answers['ngrok']:
+        ngrok_questions = [
+            {
+                'type': 'input',
+                'name': 'region',
+                'message': 'Ngrok region:',
+            },
+        ]
+        if answers['ngrok_auth']:
+            ngrok_questions.append(
+                {
+                    'type': 'input',
+                    'name': 'ngrok_token',
+                    'message': 'ngrok token: ',
+                },
+            )
+        platform_answers['ngrok'] = prompt(ngrok_questions)
 
     _create_file_with_content(
         CONFIG_PATH,
