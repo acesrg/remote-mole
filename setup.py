@@ -29,7 +29,7 @@ setup(
     long_description_content_type='text/markdown',
     entry_points={
         'console_scripts': [
-            'remote_mole = remote_mole.setup.entrypoint:register',
+            'remote_mole = remote_mole.setup.entrypoint:main',
         ]
     },
 )

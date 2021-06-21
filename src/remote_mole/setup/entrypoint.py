@@ -1,5 +1,6 @@
 from __future__ import print_function, unicode_literals
 
+import argparse
 import os
 
 from PyInquirer import prompt
@@ -88,3 +89,30 @@ def register():
         CONFIG_PATH,
         toml.dumps(platform_answers),
     )
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="remote_mole"
+    )
+    parser.add_argument(
+        '-register', action='store_true',
+        help='Register or overwrite mole configuration',
+    )
+    parser.add_argument(
+        '-start', action='store_true',
+        help='Start the mole daemon',
+    )
+    args = parser.parse_args()
+
+    if args.register:
+        register()
+        return 0
+
+    if args.run:
+        run()
+        return 0
+
+
+if __name__ == "__main__":
+    main()
