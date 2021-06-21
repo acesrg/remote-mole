@@ -1,10 +1,10 @@
 from __future__ import print_function, unicode_literals
 
 import argparse
+import configparser
 import os
 
 from PyInquirer import prompt
-import toml
 
 
 AVAILABLE_BOTS = [
@@ -17,7 +17,7 @@ CONFIG_PATH = os.path.join(
 )
 
 
-def _create_file_with_content(filename, content):
+def _create_file_with_content(filename, config):
     basename = os.path.basename(filename)
     dirname = os.path.dirname(filename)
     os.mkdir
@@ -27,10 +27,12 @@ def _create_file_with_content(filename, content):
         pass
 
     with open(filename, "w") as f:
-        f.write(content)
+        config.write(f)
 
 
 def register():
+    platform_config = configparser.ConfigParser()
+
     questions = [
         {
             'type': 'rawlist',
@@ -51,7 +53,6 @@ def register():
 
     ]
     answers = prompt(questions)
-    platform_answers = {}
     if answers['platform'] == 'Discord':
         discord_questions = [
             {
@@ -65,7 +66,7 @@ def register():
                 'message': 'To what keyword should the bot listen:',
             },
         ]
-        platform_answers['Discord'] = prompt(discord_questions)
+        platform_config['Discord'] = prompt(discord_questions)
 
     if answers['ngrok']:
         ngrok_questions = [
@@ -83,12 +84,15 @@ def register():
                     'message': 'ngrok token: ',
                 },
             )
-        platform_answers['ngrok'] = prompt(ngrok_questions)
+        platform_config['ngrok'] = prompt(ngrok_questions)
 
     _create_file_with_content(
         CONFIG_PATH,
-        toml.dumps(platform_answers),
+        platform_config,
     )
+
+
+def start():
 
 
 def main():
@@ -109,8 +113,8 @@ def main():
         register()
         return 0
 
-    if args.run:
-        run()
+    if args.start:
+        start()
         return 0
 
 
