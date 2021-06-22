@@ -137,15 +137,15 @@ def start():
     )
     os.system('systemctl --user daemon-reload')
 
-    os.system('systemctl --user start {PROJECT_NAME}')
+    os.system(f'systemctl --user start {PROJECT_NAME}')
 
 
 def stop():
-    os.system('systemctl --user stop {PROJECT_NAME}')
+    os.system(f'systemctl --user stop {PROJECT_NAME}')
 
 
 def status():
-    os.system('systemctl --user status {PROJECT_NAME}')
+    os.system(f'systemctl --user status {PROJECT_NAME}')
 
 
 def main():
