@@ -1,5 +1,5 @@
 [flake8]
-ignore =
+ignore = W503, W504
 exclude =
     .git,
     .venv/,
