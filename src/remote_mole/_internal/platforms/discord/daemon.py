@@ -154,7 +154,7 @@ async def jupyter_advice(ctx):
         'bash',
     )
     notebook_pass_cmd = _format_string_as_codeblock(
-        'jupyter notebook --generate-config',
+        'jupyter notebook password',
         'bash',
     )
     await ctx.send(
