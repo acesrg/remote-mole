@@ -27,6 +27,12 @@ setup(
     package_dir={'': 'src'},
     long_description=read('readme.md'),
     long_description_content_type='text/markdown',
+    install_requires=[
+        'pyngrok==5.0.5',
+        'discord.py==1.7.3',
+        'PyInquirer==1.0.3',
+    ],
+
     entry_points={
         'console_scripts': [
             'remote_mole = remote_mole.setup.entrypoint:main',
