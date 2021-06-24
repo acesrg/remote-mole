@@ -68,6 +68,10 @@ class Tunnel:
 
     def close(self):
         ngrok.disconnect(self.ngrok_tunnel.public_url)
+        if self.ngrok_tunnel.proto == 'http':
+            url = _get_addr_from_url(self.ngrok_tunnel.public_url)
+            https_pub_url = 'https://' + url
+            ngrok.disconnect(https_pub_url)
 
 
 def authenticate(token):
