@@ -43,12 +43,6 @@ def register():
 
     questions = [
         {
-            'type': 'rawlist',
-            'name': 'platform',
-            'message': 'Where will you talk to the bot from',
-            'choices': ['Discord'],
-        },
-        {
             'type': 'confirm',
             'name': 'ngrok',
             'message': 'Will you use ngrok',
@@ -61,20 +55,19 @@ def register():
 
     ]
     answers = prompt(questions)
-    if answers['platform'] == 'Discord':
-        discord_questions = [
-            {
-                'type': 'input',
-                'name': 'token',
-                'message': 'Discord bot token:',
-            },
-            {
-                'type': 'input',
-                'name': 'keyword',
-                'message': 'To what keyword should the bot listen:',
-            },
-        ]
-        platform_config['Discord'] = prompt(discord_questions)
+    discord_questions = [
+        {
+            'type': 'input',
+            'name': 'token',
+            'message': 'Discord bot token:',
+        },
+        {
+            'type': 'input',
+            'name': 'keyword',
+            'message': 'To what keyword should the bot listen:',
+        },
+    ]
+    platform_config['Discord'] = prompt(discord_questions)
 
     if answers['ngrok']:
         ngrok_questions = [
