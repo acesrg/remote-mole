@@ -44,11 +44,6 @@ def register():
     questions = [
         {
             'type': 'confirm',
-            'name': 'ngrok',
-            'message': 'Will you use ngrok',
-        },
-        {
-            'type': 'confirm',
             'name': 'ngrok_auth',
             'message': 'Do you want to set up a ngrok token (recommended)',
         },
