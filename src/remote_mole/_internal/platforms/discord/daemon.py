@@ -22,9 +22,13 @@ config.read(CONFIG_PATH)
 
 description = 'A mole that digs tunnels for you.'
 
+token = ''
+if config.sections():
+    token = config['Discord']['keyword'] + ' '
+
 # FIXME: the configparser deletes the blank space at the end of the keyword
 bot = commands.Bot(
-    command_prefix=config['Discord']['keyword'] + ' ',
+    command_prefix=token,
     description=description
 )
 
@@ -178,5 +182,5 @@ async def on_command_error(ctx, error):
             f"maybe try with {help_cmd}"
         )
 
-
-bot.run(config['Discord']['token'])
+if __name__ == '__main__':
+    bot.run(config['Discord']['token'])
