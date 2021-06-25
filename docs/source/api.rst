@@ -3,10 +3,37 @@ API
 
 About tunnels
 ~~~~~~~~~~~~~
-.. automethod:: remote_mole._internal.platforms.discord.daemon.tunnel
-.. automethod:: remote_mole._internal.platforms.discord.daemon.close_tunnel
+
+.. function:: tunnel (tunnel_type)
+
+    Digs a tunnel via ngrok, depending on tunnel_type
+
+    Usage:
+    
+        tunnel tunnel_type
+
+    Creates a tunnel, and if such tunnel is already created just
+    passes said open tunnel.
+
+    To know which tunnel types are supported use get_tunnel_types
+    command.
+
+.. function:: close_tunnel (tunnel_type)
+
+    Closes ngrok tunnel
+
+    Usage:
+        
+        close_tunnel tunnel_type
+
 
 Informational
 ~~~~~~~~~~~~~
-.. automethod:: remote_mole._internal.platforms.discord.daemon.get_tunnel_types
-.. automethod:: remote_mole._internal.platforms.discord.daemon.jupyter_advice
+
+.. function:: get_tunnel_types
+    
+        Gives info about tunnel types
+
+.. function:: jupyter_advice
+    
+        Gives advice on sharing jupyter notebooks

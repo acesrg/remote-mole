@@ -15,7 +15,9 @@ remote-mole
 .. |coverage| image:: https://gitlab.com/acesrg/remote-ninja/badges/master/coverage.svg
     :target: https://gitlab.com/acesrg/remote-ninja/-/jobs/artifacts/master/file/htmlcov/index.html?job=unittest
 
-``remote-mole`` is a helper to set up a bot that digs ngrok tunnels for you, commanded via discord. This way you can share a remote device with friends or colleagues, connecting to it via ``ssh`` or hosting ``jupyter notebooks`` in it, and accessing them through a ngrok url in your browser.
+``remote-mole`` is a CLI helper that sets up a bot that digs ngrok tunnels for you. The bots can be commanded via discord.
+
+This way you can share a remote device with friends or colleagues, connecting to it via ``ssh`` or hosting ``jupyter notebooks`` there, and accessing them through an url in your browser.
 
 .. toctree::
    :maxdepth: 3
@@ -38,11 +40,3 @@ All the stuff a mole can do for you.
    :maxdepth: 3
 
    api
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
