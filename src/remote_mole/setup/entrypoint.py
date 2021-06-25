@@ -41,15 +41,6 @@ def _create_file_with_content(filename, config):
 def register():
     platform_config = configparser.ConfigParser()
 
-    questions = [
-        {
-            'type': 'confirm',
-            'name': 'ngrok_auth',
-            'message': 'Do you want to set up a ngrok token (recommended)',
-        },
-
-    ]
-    answers = prompt(questions)
     discord_questions = [
         {
             'type': 'input',
@@ -63,6 +54,16 @@ def register():
         },
     ]
     platform_config['Discord'] = prompt(discord_questions)
+
+    questions = [
+        {
+            'type': 'confirm',
+            'name': 'ngrok_auth',
+            'message': 'Do you want to set up a ngrok token (recommended)',
+        },
+
+    ]
+    answers = prompt(questions)
 
     if answers['ngrok']:
         ngrok_questions = [
