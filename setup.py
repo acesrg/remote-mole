@@ -30,7 +30,7 @@ setup(
     install_requires=[
         'pyngrok==5.0.5',
         'discord.py==1.7.3',
-        'PyInquirer==1.0.3',
+        'questionary==1.9.0',
     ],
 
     entry_points={

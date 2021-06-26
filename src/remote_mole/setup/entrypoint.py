@@ -1,10 +1,8 @@
-from __future__ import print_function, unicode_literals
-
 import argparse
 import configparser
 import os
 
-from PyInquirer import prompt
+import questionary
 
 
 PROJECT_NAME = 'remote_mole'
@@ -40,59 +38,45 @@ def _create_file_with_content(filename, config):
 
 def register():
     platform_config = configparser.ConfigParser()
+    try:
+        bot_token = questionary.text('Discord bot token').unsafe_ask()
+        bot_keyword = questionary.text(
+            'To what keyword should the bot listen',
+        ).unsafe_ask()
+        platform_config['Discord'] = {
+            'token': bot_token,
+            'keyword': bot_keyword,
+        }
 
-    questions = [
-        {
-            'type': 'rawlist',
-            'name': 'platform',
-            'message': 'Where will you talk to the bot from',
-            'choices': ['Discord'],
-        },
-        {
-            'type': 'confirm',
-            'name': 'ngrok',
-            'message': 'Will you use ngrok',
-        },
-        {
-            'type': 'confirm',
-            'name': 'ngrok_auth',
-            'message': 'Do you want to set up a ngrok token (recommended)',
-        },
+        auth_ngrok = questionary.confirm(
+            'Do you want to set up a ngrok token (recommended)',
+            auto_enter=False,
+        ).unsafe_ask()
 
-    ]
-    answers = prompt(questions)
-    if answers['platform'] == 'Discord':
-        discord_questions = [
-            {
-                'type': 'input',
-                'name': 'token',
-                'message': 'Discord bot token:',
-            },
-            {
-                'type': 'input',
-                'name': 'keyword',
-                'message': 'To what keyword should the bot listen:',
-            },
-        ]
-        platform_config['Discord'] = prompt(discord_questions)
+        ngrok_data = {}
+        if auth_ngrok:
+            ngrok_token = questionary.text('ngrok token').unsafe_ask()
+            ngrok_data['ngrok_token'] = ngrok_token
 
-    if answers['ngrok']:
-        ngrok_questions = [
-            {
-                'type': 'input',
-                'name': 'region',
-                'message': 'Ngrok region:',
-            },
-        ]
-        if answers['ngrok_auth']:
-            ngrok_questions.append(
-                {
-                    'type': 'input',
-                    'name': 'ngrok_token',
-                    'message': 'ngrok token: ',
-                },
-            )
-        platform_config['ngrok'] = prompt(ngrok_questions)
+        ngrok_region = questionary.select(
+            'ngrok region',
+            choices=[
+                {'name': 'South America', 'value': 'sa'},
+                {'name': 'United States', 'value': 'us'},
+                {'name': 'Europe', 'value': 'eu'},
+                {'name': 'Asia or Pacific', 'value': 'ap'},
+                {'name': 'Australia', 'value': 'au'},
+                {'name': 'Japan', 'value': 'jp'},
+                {'name': 'India', 'value': 'in'},
+            ]
+        ).unsafe_ask()
+
+    except KeyboardInterrupt:
+        print("Cancelled by user")
+        return
+
+    ngrok_data['region'] = ngrok_region
+    platform_config['ngrok'] = ngrok_data
 
     _create_file_with_content(
         CONFIG_PATH,
