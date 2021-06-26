@@ -27,6 +27,8 @@ How to install it (CLI-API)
 ---------------------------
 Add a mole to your server!
 
+.. image:: _static/example.gif
+
 .. toctree::
    :maxdepth: 3
 

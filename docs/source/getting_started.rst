@@ -22,6 +22,8 @@ Just do::
 
 And you will be prompted with questions about the type of mole that is going to live in your server. Most of them are super intuitive, but let's get through them.
 
+.. image:: _static/example.gif
+
 **Discord bot token:**
 
 Here you need to write the token of the Discord bot. If you don't have one yet, please read above!
