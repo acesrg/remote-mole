@@ -25,7 +25,7 @@ setup(
         )
     ],
     package_dir={'': 'src'},
-    long_description=read('readme.md'),
+    long_description=read('README.md'),
     long_description_content_type='text/markdown',
     install_requires=[
         'pyngrok==5.0.5',
