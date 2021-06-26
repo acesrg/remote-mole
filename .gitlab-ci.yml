@@ -14,20 +14,15 @@ flake8:
 
 installability:
   stage: test
-  image: python:3.8.7-buster
+  image: marcotti/remote-mole-dev
   script:
-    - pip install -r requirements.txt
     - pip install .
   tags:
     - rpi
 
 unittest:
   stage: test
-  image: python:3.8.7-buster
-  before_script:
-    - pip install -r requirements.txt
-    - pip install .
-    - pip install coverage
+  image: marcotti/remote-mole-dev
   script:
     - coverage run --source=/usr/local/lib/python3.8/site-packages/remote_mole -m unittest discover -v tests/
   after_script:
@@ -41,7 +36,7 @@ unittest:
 
 pypi-deploy:
   stage: deploy
-  image: python:3.8.7-buster
+  image: marcotti/remote-mole-dev
   variables:
     CRYPTOGRAPHY_DONT_BUILD_RUST: 1
   before_script:
