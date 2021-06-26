@@ -68,7 +68,7 @@ def register():
                 {'name': 'Australia', 'value': 'au'},
                 {'name': 'Japan', 'value': 'jp'},
                 {'name': 'India', 'value': 'in'},
-                ]
+            ]
         ).unsafe_ask()
 
     except KeyboardInterrupt:
