@@ -12,7 +12,7 @@ def read(fname):
 
 setup(
     name="remote_mole",
-    version="1.0.2",
+    version="1.0.3",
     author="Marco Miretti",
     author_email="marcomiretti@gmail.com",
     description=("Create moles on remote setups."),
