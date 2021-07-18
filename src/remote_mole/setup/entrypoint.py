@@ -111,6 +111,7 @@ def start():
     sysd_file['Service'] = {
         'ExecStart': f'{PY_EXEC_PATH} {daemon_path}',
         'Restart': 'on-failure',
+        'RestartSec': '60',
         'Environment': 'PYTHONUNBUFFERED=1',
     }
     sysd_file['Install'] = {
