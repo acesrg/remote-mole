@@ -123,6 +123,7 @@ def start():
         sysd_file,
     )
     os.system('systemctl --user daemon-reload')
+    os.system(f'systemctl --user enable {PROJECT_NAME}')
 
     os.system(f'systemctl --user start {PROJECT_NAME}')
 
